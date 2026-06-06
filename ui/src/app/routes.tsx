@@ -21,6 +21,7 @@ import { CommunityDetail } from "./screens/main/CommunityDetail";
 import { Notifications } from "./screens/main/Notifications";
 import { Chats } from "./screens/main/Chats";
 import { Profile } from "./screens/main/Profile";
+import { SignUp } from "./screens/auth/SignUp";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: Splash },
       { path: "welcome", Component: Welcome },
+      { path: "signup", Component: SignUp },
       { path: "login", Component: Login },
       { path: "otp", Component: OTP },
       { path: "interests", Component: Interests },

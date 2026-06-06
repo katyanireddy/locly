@@ -1,72 +1,154 @@
-import { useNavigate } from 'react-router';
-import { ChevronLeft } from 'lucide-react';
-import { motion } from 'motion/react';
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import { motion } from "motion/react";
+import { ChevronLeft, Mail, Lock, Chrome } from "lucide-react";
+import loginIllustration from "../../../assets/images/login-illustration.jpeg";
 
 export function Login() {
   const navigate = useNavigate();
 
-  return (
-    <div className="flex-1 flex flex-col bg-white dark:bg-[#0F1115] px-6 pt-12 pb-6 relative h-full overflow-hidden">
-      {/* Background blurs */}
-      <div className="absolute top-20 left-0 w-40 h-40 bg-[#4D41DF]/5 dark:bg-[#4D41DF]/10 rounded-full blur-[40px] pointer-events-none"></div>
-      <div className="absolute bottom-20 right-0 w-48 h-48 bg-[#00C2A8]/5 dark:bg-[#00C2A8]/10 rounded-full blur-[40px] pointer-events-none"></div>
+  const [emailOrPhone, setEmailOrPhone] = useState("");
+  const [password, setPassword] = useState("");
 
-      <button onClick={() => navigate(-1)} className="absolute top-12 left-4 p-2 z-10">
-        <ChevronLeft size={24} className="text-gray-900 dark:text-white" />
+  const isValid =
+    emailOrPhone.trim().length > 3 &&
+    password.length >= 8;
+
+  return (
+    <div className="h-screen bg-white dark:bg-[#0F1115] px-6 pt-4 pb-8 overflow-y-auto">
+
+      <button
+        onClick={() => navigate(-1)}
+        className="mb-1"
+      >
+        <ChevronLeft
+          size={28}
+          className="text-gray-900 dark:text-white"
+        />
       </button>
 
-      <div className="mt-16 flex-1 flex flex-col z-10">
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.4 }}
-        >
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Enter your number</h1>
-          <p className="text-gray-500 dark:text-gray-400 mb-8">We'll send a verification code to your phone.</p>
-        </motion.div>
+      <motion.h1
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-3xl font-extrabold text-[#2563EB] justify-center flex"
+      >
+        Locly
+        
+      </motion.h1>
+      <p className="text-[orange] font-semibold mb-2" style={{ textAlign: "center" }}>
+          Welcome Back
+        </p>
 
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="space-y-4 mb-8"
-        >
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone Number</label>
-            <div className="flex gap-2">
-              <div className="bg-gray-50 dark:bg-[#1B1B24] border border-gray-200 dark:border-gray-800 rounded-xl px-4 py-3.5 flex items-center gap-2 cursor-pointer shrink-0">
-                <span className="text-xl">🇮🇳</span>
-                <span className="text-gray-900 dark:text-white font-medium">+91</span>
-              </div>
-              <input 
-                type="tel" 
-                placeholder="98765 43210"
-                className="w-full bg-gray-50 dark:bg-[#1B1B24] border border-gray-200 dark:border-gray-800 rounded-xl px-4 py-3.5 text-gray-900 dark:text-white text-lg tracking-wider focus:outline-none focus:ring-2 focus:ring-[#6C63FF]"
-              />
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-        >
-          <button 
-            onClick={() => navigate('/otp')}
-            className="w-full bg-[#6C63FF] text-white font-semibold py-4 rounded-full shadow-[0_10px_25px_-5px_rgba(108,99,255,0.4)] transition-transform active:scale-95 mb-4"
-          >
-            Send OTP
-          </button>
-
-          <button 
-            onClick={() => navigate('/login')}
-            className="w-full text-[#6C63FF] font-semibold py-4 rounded-full transition-transform active:scale-95"
-          >
-            Already have an account? Log In
-          </button>
-        </motion.div>
+      <div className="flex justify-center my-2">
+        <img
+          src={loginIllustration}
+          alt="Login"
+          className="w-32 h-32 object-contain"
+        />
       </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
+        
+
+        <h3 className="text-2xl font-bold text-gray-900 dark:text-white leading-tight text-center">
+          Continue your local journey.
+        </h3>
+
+        <p className="text-gray-500 mt-2 mb-4 text-sm leading-4 text-center">
+          Discover communities, events and people around you.
+        </p>
+      </motion.div>
+
+      <button
+        className="bg-yellow-500 w-full border border-gray-200 rounded-2xl py-4 flex items-center justify-center gap-1 font-semibold text-gray-700 shadow-sm mb-6"
+      >
+        <Chrome size={20} />
+        Continue with Google
+      </button>
+
+      <div className="flex items-center mb-6">
+        <div className="flex-1 h-px bg-gray-200"></div>
+        <span className="px-4 text-gray-400 text-sm">OR</span>
+        <div className="flex-1 h-px bg-gray-200"></div>
+      </div>
+
+      <div className="space-y-4">
+
+        <div>
+          <label className="text-sm font-semibold text-gray-700 block mb-2">
+            Email or Phone
+          </label>
+
+          <div className="border border-gray-200 rounded-2xl px-4 py-4 flex items-center gap-3">
+            <Mail size={18} className="text-gray-400" />
+
+            <input
+              value={emailOrPhone}
+              onChange={(e) =>
+                setEmailOrPhone(e.target.value)
+              }
+              placeholder="Enter email or phone"
+              className="flex-1 outline-none"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label className="text-sm font-semibold text-gray-700 block mb-2">
+            Password
+          </label>
+
+          <div className="border border-gray-200 rounded-2xl px-4 py-4 flex items-center gap-3">
+            <Lock size={18} className="text-gray-400" />
+
+            <input
+              type="password"
+              value={password}
+              onChange={(e) =>
+                setPassword(e.target.value)
+              }
+              placeholder="Enter password"
+              className="flex-1 outline-none"
+            />
+          </div>
+        </div>
+
+      </div>
+
+      <div className="text-right mt-3">
+        <button className="text-[#2563EB] font-medium text-sm">
+          Forgot Password?
+        </button>
+      </div>
+
+      <div className="mt-8">
+
+        <button
+          disabled={!isValid}
+          onClick={() => navigate("/app/home")}
+          className={`w-full py-4 rounded-2xl font-semibold text-lg transition-all ${
+            isValid
+              ? "bg-[#2563EB] text-white shadow-lg"
+              : "bg-gray-100 text-gray-400"
+          }`}
+        >
+          Log In
+        </button>
+
+        <p className="text-center text-sm text-gray-500 mt-5">
+          Don't have an account?{" "}
+          <span
+            onClick={() => navigate("/signup")}
+            className="text-[#2563EB] font-semibold cursor-pointer"
+          >
+            Create Account
+          </span>
+        </p>
+      </div>
+
     </div>
   );
 }
